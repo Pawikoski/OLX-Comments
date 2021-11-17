@@ -1,0 +1,21 @@
+{
+    "name": "OLX Notes",
+    "version": "0.1",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "css": [
+                "css/fontawesome.min.css",
+                "css/regular.min.css"
+            ],
+            "matches": ["*://*.olx.pl/*"],
+            "js": ["js/jquery-3.6.0.min.js", "content.js"]
+        }
+    ],
+
+    "web_accessible_resources": [
+        "css/fontawesome.min.css",
+        "css/regular.min.css",
+        "fonts/*"
+    ]
+}
