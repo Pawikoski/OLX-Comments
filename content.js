@@ -43,17 +43,7 @@ function waitForElementToDisplay(selector, checkFrequencyInMs, timeoutInMs) {
 function callback() {
   console.log("start");
   
-    // let dupsko = document.querySelector(".css-sg1fy9 div");
-    // // dupsko.querySelector("div")
-
-    // const notesBtn = document.createElement("BUTTON");
-    // const btnTxt = document.createTextNode("NOTES");
-    // notesBtn.appendChild(btnTxt);
-
-    // dupsko.appendChild(notesBtn);
-
     notesBtn = '<i style="margin-right: 1em; height: 1em; width: 1em" class="far fa-comments"></i>';
-
     $(".css-sg1fy9 div").prepend(notesBtn);
 
     let pageViews = document.querySelector("span[data-testid='page-view-text']").textContent;
