@@ -46,5 +46,6 @@ function callback() {
     notesBtn = '<i style="margin-right: 1em; height: 1em; width: 1em" class="far fa-comments"></i>';
     $(".css-sg1fy9 div").prepend(notesBtn);
 
-    let pageViews = document.querySelector("span[data-testid='page-view-text']").textContent;
+    let pageViews = $("span[data-testid='page-view-text']").text();
+    console.log(pageViews);
 }
