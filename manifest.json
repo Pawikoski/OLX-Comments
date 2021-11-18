@@ -6,7 +6,8 @@
         {
             "css": [
                 "css/fontawesome.min.css",
-                "css/regular.min.css"
+                "css/regular.min.css",
+                "css/popup.css"
             ],
             "matches": ["*://*.olx.pl/*"],
             "js": ["js/jquery-3.6.0.min.js", "content.js"]
@@ -14,6 +15,7 @@
     ],
 
     "web_accessible_resources": [
+        "css/popup.css",
         "css/fontawesome.min.css",
         "css/regular.min.css",
         "fonts/*"
