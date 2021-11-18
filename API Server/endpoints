@@ -1,0 +1,18 @@
+add
+POST
+{
+    "id", "value"
+}
+{
+    200
+    
+}
+
+get
+GET
+{
+    "id"
+}
+{
+    200: "value"
+}
