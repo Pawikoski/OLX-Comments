@@ -27,10 +27,6 @@ function waitForElementToDisplay(selector, checkFrequencyInMs, timeoutInMs) {
 
 
 function callback() {
-  console.log("start");
-
-  // https://bbbootstrap.com/snippets/bootstrap-comments-template-90811385
-
   let notesContainer = document.createElement("div");
   header = document.createElement("h3");
   header.setAttribute("class", "eu5v0x0");
@@ -40,6 +36,7 @@ function callback() {
 
   let form = document.createElement("div");
   form.setAttribute("class", "d-flex justify-content-center pt-3 pb-2")
+  form.setAttribute("id", "form1")
 
   let inputText = document.createElement("input");
   inputText.setAttribute("type", "text");
@@ -48,14 +45,37 @@ function callback() {
   inputText.setAttribute("class", "form-control addtxt");
   
   let inputSubmit = document.createElement("input");
-  inputSubmit.setAttribute("type", "button")
-  inputSubmit.setAttribute("id", "submit")
-  inputSubmit.setAttribute("value", "+")
-  inputSubmit.setAttribute("class", "btn btn-primary")
+  inputSubmit.setAttribute("type", "button");
+  inputSubmit.setAttribute("id", "submit");
+  inputSubmit.setAttribute("value", "+");
+  inputSubmit.setAttribute("class", "btn btn-primary");
+
+
+  let formName = document.createElement("div");
+  formName.setAttribute("class", "hidden");
+  formName.setAttribute("id", "form2");
+
+  let inputName = document.createElement("input");
+  inputName.setAttribute("type", "text");
+  inputName.setAttribute("id", "name");
+  inputName.setAttribute("placeholder", "+ Podaj swoje imie!");
+  inputName.setAttribute("class", "form-control addtxt");
+  inputName.setAttribute("style", "width: 48%;");
+  
+  let inputSubmitName = document.createElement("input");
+  inputSubmitName.setAttribute("type", "button");
+  inputSubmitName.setAttribute("id", "submit-name");
+  inputSubmitName.setAttribute("value", "Dodaj komentarz");
+  inputSubmitName.setAttribute("class", "btn btn-primary");
+  inputSubmitName.setAttribute("style", "width: 48%;");
 
   form.append(inputText)
   form.append(inputSubmit)
   notesContainer.append(form)
+
+  formName.append(inputName)
+  formName.append(inputSubmitName)
+  notesContainer.append(formName)
 
 
   function setComment(text, author, likes) {
@@ -159,16 +179,12 @@ function callback() {
         };
         
         $.ajax(settings).done(function (response) {
-          for(i=0;i<response.length;i++){
+          for(i=response.length-1;i>0;i--){
             commentsRetrieved = true
-            notesContainer.append(setComment(response[i]['content'], 'author', 'likes'));
+            notesContainer.append(setComment(response[i]['content'], response[i]['author'], 'likes'));
           }
         });
       }
-      //  else {
-      //   for(i=0;i<commentsRetrieved.length;i++){
-      //     notesContainer.append(setComment(commentsRetrieved[i]['content'], 'author', 'likes'));
-      //   }
 
       showCommentsBox();
     } else {
@@ -181,39 +197,29 @@ function callback() {
 
   submitBtn = document.querySelector("#submit");
   submitBtn.addEventListener("click", function(){
-    let content = document.querySelector("#content").value
+    let firstForm = document.querySelector("#form1");
+    let secondForm = document.querySelector("#form2");
+    secondForm.classList.remove("hidden");
+    secondForm.classList.add("d-flex", "justify-content-center", "pt-3", "pb-2")
+    firstForm.classList.add("hidden")
+    firstForm.classList.remove("d-flex", "justify-content-center", "pt-3", "pb-2")
+    console.log("asdfasdf")
+    // secondForm.classList.add("hidden")
+  });
+
+  submitNameBtn = document.querySelector("#submit-name")
+  submitNameBtn.addEventListener("click", function() {
+    let content = document.querySelector("#content").value;
+    let author = document.querySelector("#name").value;
     let settings = {
-          "url": "http://localhost:5000/notes/" + offerId + "?content=" + content + "&offer_views=" + offerViews,
+          "url": "http://localhost:5000/notes/" + offerId + "?content=" + content + "&offer_views=" + offerViews + "&author=" + author,
           "method": "PUT",
           "timeout": 0,
         };
         
     $.ajax(settings).done(function (response) {
       console.log(response);
-      // console.log(response);
     });
   });
-
-
-  // let form = document.createElement("form");
-
-  // let contentField = document.createElement("input");
-  // contentField.setAttribute("type", "text");
-  // contentField.setAttribute("id", "contentField");
-  // form.append(contentField);
-
-  // let submitButton = document.createElement("input");
-  // submitButton.setAttribute("value", "TEST");
-  // submitButton.setAttribute("type", "button");
-  // submitButton.setAttribute("id", "submitBtn");
-  // form.append(submitButton);
-
-
-
-  // $("#submitBtn").click(function() {
-  //   let content = $("#contentField").val();
-
-  //   
-  // });
 
 }
