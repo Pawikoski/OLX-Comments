@@ -146,22 +146,29 @@ function callback() {
     commentBoxClasses.remove("hidden");
   }
 
+  let commentsRetrieved = false
+
   hideCommentsBox();
   $("#notesBtn").click(function(){
     if(commentBoxClasses.contains("hidden")){
-      var settings = {
-        "url": "http://localhost:5000/notes/" + offerId,
-        "method": "GET",
-        "timeout": 0,
-      };
-      
-      $.ajax(settings).done(function (response) {
-        for(i=0;i<response.length;i++){
-          console.log(response[i])
-          console.log(response[i]['content'])
-          notesContainer.append(setComment(response[i]['content'], 'author', 'likes'));
-        }
-      });
+      if(!commentsRetrieved){
+        var settings = {
+          "url": "http://localhost:5000/notes/" + offerId,
+          "method": "GET",
+          "timeout": 0,
+        };
+        
+        $.ajax(settings).done(function (response) {
+          for(i=0;i<response.length;i++){
+            commentsRetrieved = true
+            notesContainer.append(setComment(response[i]['content'], 'author', 'likes'));
+          }
+        });
+      }
+      //  else {
+      //   for(i=0;i<commentsRetrieved.length;i++){
+      //     notesContainer.append(setComment(commentsRetrieved[i]['content'], 'author', 'likes'));
+      //   }
 
       showCommentsBox();
     } else {
