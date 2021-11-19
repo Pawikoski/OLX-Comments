@@ -38,6 +38,25 @@ function callback() {
   notesContainer.append(header);
   notesContainer.setAttribute("class", "container justify-content-center mt-5 border-left border-right comment-box");
 
+  let form = document.createElement("div");
+  form.setAttribute("class", "d-flex justify-content-center pt-3 pb-2")
+
+  let inputText = document.createElement("input");
+  inputText.setAttribute("type", "text");
+  inputText.setAttribute("id", "content");
+  inputText.setAttribute("placeholder", "+ Dodaj komentarz");
+  inputText.setAttribute("class", "form-control addtxt");
+  
+  let inputSubmit = document.createElement("input");
+  inputSubmit.setAttribute("type", "button")
+  inputSubmit.setAttribute("id", "submit")
+  inputSubmit.setAttribute("value", "+")
+  inputSubmit.setAttribute("class", "btn btn-primary")
+
+  form.append(inputText)
+  form.append(inputSubmit)
+  notesContainer.append(form)
+
 // <div class="d-flex justify-content-center py-2">
 //    <div class="second py-2 px-2">
 //      <span class="text1">Type your note, and hit enter to add it</span>
@@ -78,32 +97,36 @@ function callback() {
     divAuthor.append(spanAuthor);
     divMain.append(divAuthor);
 
-    divThumbs = document.createElement("div");
+    let divThumbs = document.createElement("div");
 
-    spanOne = document.createElement("span");
-    spanOne.setAttribute("class", "text3");
-    spanOne.innerHTML = "Upvote";
-
-    spanTwo = document.createElement("span");
+    let spanTwo = document.createElement("span");
     spanTwo.setAttribute("class", "thumbup");
 
-    thumbsUpButton = document.createElement("i");
-    thumbsUpButton.setAttribute("class", "fa fa-thumbs-o-up");
+    let thumbsBox = document.createElement("div");
 
-    spanTwo.append(thumbsUpButton);
+    let thumbsUpButton = document.createElement("i");
+    thumbsUpButton.setAttribute("class", "far fa-thumbs-up");
+
+    let thumbsDownButton = document.createElement("i");
+    thumbsDownButton.setAttribute("class", "far fa-thumbs-down");
+
+    thumbsBox.append(thumbsUpButton);
+    thumbsBox.append(thumbsDownButton);
+
+    spanTwo.append(thumbsBox);
 
     let spanThumbsCount = document.createElement("span");
     spanThumbsCount.setAttribute("class", "text4");
     spanThumbsCount.innerHTML = likes;
 
-    divThumbs.append(spanOne);
     divThumbs.append(spanTwo);
     divThumbs.append(spanThumbsCount);
 
+    divMain.append(divThumbs)
+    divMain.append(divAuthor)
 
     noteChild.append(textOne);
-    noteChild.append(divAuthor);
-    noteChild.append(divThumbs);
+    noteChild.append(divMain);
     note.append(noteChild);
 
     return note;
@@ -113,7 +136,6 @@ function callback() {
   notesContainer.append(setComment("Sed luctus sed urna eu blandit. Morbi viverra nibh id est suscipit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam ultrices viverra sodales. Quisque rutrum diam vitae fringilla molestie. Quisque finibus ut ex vulputate tristique. Aliquam mollis felis rhoncus velit mollis, sed pulvinar elit suscipit. Etiam commodo varius dictum. Vestibulum mattis purus in nisl efficitur varius laoreet vel odio. Nunc sed orci vel nunc euismod dictum sit amet ut ex.", "author2", 420))
   notesContainer.append(setComment("Phasellus varius mattis lacus, at rhoncus quam condimentum eget. Aliquam sed purus id felis porttitor pulvinar a sit amet nisi. Phasellus quis mi est. Proin posuere, lorem eu ornare interdum, odio turpis elementum leo, at fringilla purus ligula vel eros. Mauris nec metus et urna placerat faucibus id in libero. Donec ornare nec risus et tristique. Pellentesque lacinia euismod dolor vel efficitur. Nam vitae auctor diam. Praesent convallis rutrum lacus ut convallis. Nam ultricies purus ac pharetra hendrerit. Ut sollicitudin volutpat rhoncus. Vestibulum iaculis odio mauris, rutrum semper odio efficitur vitae.", "asdfsdf", 12312))
 
-  // 
   
   let notesBtn = document.createElement("i");
   notesBtn.setAttribute("style", "margin-right: 1em; height: 1em; width: 1em");
@@ -133,7 +155,6 @@ function callback() {
 
   $('div[data-cy="ad_description"]').prepend(notesContainer);
 
-  // console.log($(".comment-box").classList);
 
   let commentBoxClasses = document.querySelector(".comment-box").classList
 
