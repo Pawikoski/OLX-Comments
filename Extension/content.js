@@ -1,5 +1,5 @@
 let isLoaded = false
-let pageViews = null
+let offerViews = null
 
 
 if (document.URL.includes("d/oferta/")){
@@ -34,16 +34,55 @@ function callback() {
     console.log("click")
   }
   
-    notesBtn = '<i onclick="document.querySelector(\'.hover_bkgr_fricc\').classList.remove(\'hidden\');" style="margin-right: 1em; height: 1em; width: 1em" class="far fa-comments"></i>';
-    $(".css-sg1fy9 div").prepend(notesBtn);
+  notesBtn = '<i onclick="document.querySelector(\'.hover_bkgr_fricc\').classList.remove(\'hidden\');" style="margin-right: 1em; height: 1em; width: 1em" class="far fa-comments"></i>';
+  $(".css-sg1fy9 div").prepend(notesBtn);
 
 
 
-    let pageViews = $("span[data-testid='page-view-text']").text();
-    console.log(pageViews);
+  let offerViews = $("span[data-testid='page-view-text']").text();
+  console.log(offerViews);
 
-    let popup = '<div class="hover_bkgr_fricc hidden"><span class="helper"></span><div><div onclick="document.querySelector(\'.hover_bkgr_fricc\').classList.add(\'hidden\');" class="popupCloseButton">&times;</div><p>Add any HTML content<br />inside the popup box!</p></div></div>'
-    $("body").append(popup);
+  let offerId = $(".css-9xy3gn-Text").text();
+
+  console.log(offerId);
+
+
+  let form = document.createElement("form");
+
+  let contentField = document.createElement("input");
+  contentField.setAttribute("type", "text");
+  contentField.setAttribute("id", "contentField");
+  form.append(contentField);
+
+  let submitButton = document.createElement("input");
+  submitButton.setAttribute("value", "TEST");
+  submitButton.setAttribute("type", "button");
+  submitButton.setAttribute("id", "submitBtn");
+  form.append(submitButton);
+
+
+  $('div[data-cy="ad_description"]').prepend(form);
+
+  $("#submitBtn").click(function() {
+    console.log($("#contentInput").val())
+  });
+
+  // var settings = {
+  //   "url": "http://localhost:5000/notes/1?content=postman1&offer_views=12",
+  //   "method": "PUT",
+  //   "timeout": 0,
+  // };
+  
+  // $.ajax(settings).done(function (response) {
+  //   console.log(response);
+  // });
+
+
+  // console.log()
+
+
+  // let popup = '<div class="hover_bkgr_fricc hidden"><span class="helper"></span><div><div onclick="document.querySelector(\'.hover_bkgr_fricc\').classList.add(\'hidden\');" class="popupCloseButton">&times;</div><p>Add any HTML content<br />inside the popup box!</p></div></div>'
+  // $("body").append(popup);
 
 
 

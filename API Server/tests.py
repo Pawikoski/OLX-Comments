@@ -2,11 +2,10 @@ import requests
 
 BASE = "http://127.0.0.1:5000/"
 
-r = requests.put( BASE + 'notes/420', {
-    "content": "hehe",
-    "offer_views": 69,
+r = requests.put( BASE + 'notes/2', {
+    "content": "drugi",
+    "offer_views": 3213,
     })
 
-print(r.status_code)
-print(r)
-print(r.json())
+if r.status_code == 201:
+    print("OK")
