@@ -31,13 +31,28 @@ function callback() {
 
   function showPopup(){
     $('.hover_bkgr_fricc').show();
-    console.log("click")
+    console.log("click");
   }
   
-  let notesBtn = document.createElement
-  notesBtn = '<i onclick="document.querySelector(\'.hover_bkgr_fricc\').classList.remove(\'hidden\');" style="margin-right: 1em; height: 1em; width: 1em" class="far fa-comments"></i>';
+  // https://bbbootstrap.com/snippets/bootstrap-comments-template-90811385
+
+  let notesContainer = document.createElement("div")
+  notesContainer.setAttribute("class", "container justify-content-center mt-5 border-left border-right")
+  notesContainer.innerHTML = "TEST";
+
+  
+  let notesBtn = document.createElement("i");
+  notesBtn.setAttribute("style", "margin-right: 1em; height: 1em; width: 1em");
+  notesBtn.setAttribute("class", "far fa-comments");
+  notesBtn.setAttribute("id", "notesBtn")
+
+
+
   $(".css-sg1fy9 div").prepend(notesBtn);
 
+  $("#notesBtn").click(function(){
+    console.log("you just clicked the button. Comments section in prrogresss.")
+  })
 
 
   let offerViews = $("span[data-testid='page-view-text']").text().match("[0-9]*$")[0];
@@ -49,21 +64,21 @@ function callback() {
   console.log(offerId);
 
 
-  let form = document.createElement("form");
+  // let form = document.createElement("form");
 
-  let contentField = document.createElement("input");
-  contentField.setAttribute("type", "text");
-  contentField.setAttribute("id", "contentField");
-  form.append(contentField);
+  // let contentField = document.createElement("input");
+  // contentField.setAttribute("type", "text");
+  // contentField.setAttribute("id", "contentField");
+  // form.append(contentField);
 
-  let submitButton = document.createElement("input");
-  submitButton.setAttribute("value", "TEST");
-  submitButton.setAttribute("type", "button");
-  submitButton.setAttribute("id", "submitBtn");
-  form.append(submitButton);
+  // let submitButton = document.createElement("input");
+  // submitButton.setAttribute("value", "TEST");
+  // submitButton.setAttribute("type", "button");
+  // submitButton.setAttribute("id", "submitBtn");
+  // form.append(submitButton);
 
 
-  $('div[data-cy="ad_description"]').prepend(form);
+  $('div[data-cy="ad_description"]').prepend(notesContainer);
 
   $("#submitBtn").click(function() {
     let content = $("#contentField").val();

@@ -5,16 +5,18 @@
     "content_scripts": [
         {
             "css": [
+                "css/bootstrap.min.css",
                 "css/fontawesome.min.css",
                 "css/regular.min.css",
                 "css/popup.css"
             ],
             "matches": ["*://*.olx.pl/*"],
-            "js": ["js/jquery-3.6.0.min.js", "content.js"]
+            "js": ["js/jquery-3.6.0.min.js", "js/bootstrap.bundle.min.js", "content.js"]
         }
     ],
 
     "web_accessible_resources": [
+        "css/bootstrap.min.css",
         "css/popup.css",
         "css/fontawesome.min.css",
         "css/regular.min.css",
