@@ -1,6 +1,6 @@
 {
     "name": "OLX Notes",
-    "version": "0.0.0.1",
+    "version": "0.0.0.2",
     "manifest_version": 2,
     "content_scripts": [
         {
@@ -10,7 +10,7 @@
                 "css/regular.min.css",
                 "css/comments.css"
             ],
-            "matches": ["*://*.olx.pl/*"],
+            "matches": ["*://*.olx.pl/d/oferta/*"],
             "js": ["js/jquery-3.6.0.min.js", "js/bootstrap.bundle.min.js", "content.js"]
         }
     ],
