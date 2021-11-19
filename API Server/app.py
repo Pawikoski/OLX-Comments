@@ -2,8 +2,10 @@ from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -16,8 +18,7 @@ class NoteModel(db.Model):
     offer_views = db.Column(db.Integer, nullable=False)
     # date = db.Column(db.DateTime(timezone=True), server_default=func.now(), nullable=False)
 
-    # def __repr__(self):
-    #     return f"Note(name={name}, views={views}, likes={likes})"
+
 
 
 note_put_args = reqparse.RequestParser()

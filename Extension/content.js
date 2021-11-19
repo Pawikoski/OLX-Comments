@@ -39,10 +39,11 @@ function callback() {
 
 
 
-  let offerViews = $("span[data-testid='page-view-text']").text();
+  let offerViews = $("span[data-testid='page-view-text']").text().match("[0-9]*$")[0];
   console.log(offerViews);
 
   let offerId = $(".css-9xy3gn-Text").text();
+  offerId = offerId.match("[0-9]*$")[0];
 
   console.log(offerId);
 
@@ -64,18 +65,19 @@ function callback() {
   $('div[data-cy="ad_description"]').prepend(form);
 
   $("#submitBtn").click(function() {
-    console.log($("#contentInput").val())
-  });
+    let content = $("#contentField").val();
 
-  // var settings = {
-  //   "url": "http://localhost:5000/notes/1?content=postman1&offer_views=12",
-  //   "method": "PUT",
-  //   "timeout": 0,
-  // };
-  
-  // $.ajax(settings).done(function (response) {
-  //   console.log(response);
-  // });
+    var settings = {
+      "url": "http://localhost:5000/notes/" + offerId + "?content=" + content + "&offer_views=" + offerViews,
+      "method": "PUT",
+      "timeout": 0,
+    };
+    
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+
+  });
 
 
   // console.log()
