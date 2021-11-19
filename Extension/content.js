@@ -28,6 +28,7 @@ function waitForElementToDisplay(selector, checkFrequencyInMs, timeoutInMs) {
 
 function callback() {
   let notesContainer = document.createElement("div");
+  notesContainer.setAttribute("id", "container");
   header = document.createElement("h3");
   header.setAttribute("class", "eu5v0x0");
   header.innerHTML = "Komentarze";
@@ -76,6 +77,8 @@ function callback() {
   formName.append(inputName)
   formName.append(inputSubmitName)
   notesContainer.append(formName)
+
+  
 
 
   function setComment(text, author, likes) {
@@ -170,6 +173,7 @@ function callback() {
 
   hideCommentsBox();
   $("#notesBtn").click(function(){
+    document.location.href = "#container"
     if(commentBoxClasses.contains("hidden")){
       if(!commentsRetrieved){
         var settings = {
@@ -194,16 +198,14 @@ function callback() {
   })
 
 
-
+  let firstForm = document.querySelector("#form1");
+  let secondForm = document.querySelector("#form2");
   submitBtn = document.querySelector("#submit");
   submitBtn.addEventListener("click", function(){
-    let firstForm = document.querySelector("#form1");
-    let secondForm = document.querySelector("#form2");
     secondForm.classList.remove("hidden");
     secondForm.classList.add("d-flex", "justify-content-center", "pt-3", "pb-2")
     firstForm.classList.add("hidden")
     firstForm.classList.remove("d-flex", "justify-content-center", "pt-3", "pb-2")
-    console.log("asdfasdf")
     // secondForm.classList.add("hidden")
   });
 
@@ -220,6 +222,17 @@ function callback() {
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
+
+    notesContainer.insertBefore(setComment(content, author, 'likes'), notesContainer.children[3]);
+
+    secondForm.classList.add("hidden");
+    secondForm.classList.remove("d-flex", "justify-content-center", "pt-3", "pb-2")
+    firstForm.classList.remove("hidden")
+    firstForm.classList.add("d-flex", "justify-content-center", "pt-3", "pb-2")
+    document.querySelector("#content").value = ""
+    document.querySelector("#name").value = null
+
+    
   });
 
 }
