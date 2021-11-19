@@ -57,23 +57,6 @@ function callback() {
   form.append(inputSubmit)
   notesContainer.append(form)
 
-// <div class="d-flex justify-content-center py-2">
-//    <div class="second py-2 px-2">
-//      <span class="text1">Type your note, and hit enter to add it</span>
-//      <div class="d-flex justify-content-between py-1 pt-2">
-  //      <div>
-  //        <span class="text2">Curtis</span>
-  //      </div>
-  //      <div>
-  //        <span class="text3">Upvote?</span>
-  //        <span class="thumbup">
-  //          <i class="fa fa-thumbs-o-up"></i>
-  //        </span>
-  //        <span class="text4">3</span>
-  //      </div>
-//       </div>
-//    </div>
-// </div>
 
   function setComment(text, author, likes) {
     note = document.createElement("div");
@@ -132,10 +115,7 @@ function callback() {
     return note;
   }
 
-  notesContainer.append(setComment("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse laoreet finibus justo, non consectetur augue pretium quis. Mauris aliquet, dui id elementum rutrum, leo elit luctus velit, at tincidunt eros nunc vel erat. Fusce sollicitudin urna ligula, et suscipit orci semper in. Quisque et mi mauris. Integer interdum pulvinar ipsum, vitae varius orci vulputate vel. Quisque aliquet eu quam at eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "author1", 69))
-  notesContainer.append(setComment("Sed luctus sed urna eu blandit. Morbi viverra nibh id est suscipit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam ultrices viverra sodales. Quisque rutrum diam vitae fringilla molestie. Quisque finibus ut ex vulputate tristique. Aliquam mollis felis rhoncus velit mollis, sed pulvinar elit suscipit. Etiam commodo varius dictum. Vestibulum mattis purus in nisl efficitur varius laoreet vel odio. Nunc sed orci vel nunc euismod dictum sit amet ut ex.", "author2", 420))
-  notesContainer.append(setComment("Phasellus varius mattis lacus, at rhoncus quam condimentum eget. Aliquam sed purus id felis porttitor pulvinar a sit amet nisi. Phasellus quis mi est. Proin posuere, lorem eu ornare interdum, odio turpis elementum leo, at fringilla purus ligula vel eros. Mauris nec metus et urna placerat faucibus id in libero. Donec ornare nec risus et tristique. Pellentesque lacinia euismod dolor vel efficitur. Nam vitae auctor diam. Praesent convallis rutrum lacus ut convallis. Nam ultricies purus ac pharetra hendrerit. Ut sollicitudin volutpat rhoncus. Vestibulum iaculis odio mauris, rutrum semper odio efficitur vitae.", "asdfsdf", 12312))
-
+  
   
   let notesBtn = document.createElement("i");
   notesBtn.setAttribute("style", "margin-right: 1em; height: 1em; width: 1em");
@@ -169,12 +149,43 @@ function callback() {
   hideCommentsBox();
   $("#notesBtn").click(function(){
     if(commentBoxClasses.contains("hidden")){
+      var settings = {
+        "url": "http://localhost:5000/notes/" + offerId,
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        for(i=0;i<response.length;i++){
+          console.log(response[i])
+          console.log(response[i]['content'])
+          notesContainer.append(setComment(response[i]['content'], 'author', 'likes'));
+        }
+      });
+
       showCommentsBox();
     } else {
       hideCommentsBox();
     }
     console.log("halo");
   })
+
+
+
+  submitBtn = document.querySelector("#submit");
+  submitBtn.addEventListener("click", function(){
+    let content = document.querySelector("#content").value
+    let settings = {
+          "url": "http://localhost:5000/notes/" + offerId + "?content=" + content + "&offer_views=" + offerViews,
+          "method": "PUT",
+          "timeout": 0,
+        };
+        
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+      // console.log(response);
+    });
+  });
 
 
   // let form = document.createElement("form");
@@ -195,15 +206,7 @@ function callback() {
   // $("#submitBtn").click(function() {
   //   let content = $("#contentField").val();
 
-  //   var settings = {
-  //     "url": "http://localhost:5000/notes/" + offerId + "?content=" + content + "&offer_views=" + offerViews,
-  //     "method": "PUT",
-  //     "timeout": 0,
-  //   };
-    
-  //   $.ajax(settings).done(function (response) {
-  //     console.log(response);
-  //   });
+  //   
   // });
 
 }
