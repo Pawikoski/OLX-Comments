@@ -33,18 +33,37 @@ function callback() {
     $('.hover_bkgr_fricc').show();
     console.log("click");
   }
-  
+
   // https://bbbootstrap.com/snippets/bootstrap-comments-template-90811385
 
   let notesContainer = document.createElement("div")
   notesContainer.setAttribute("class", "container justify-content-center mt-5 border-left border-right")
-  notesContainer.innerHTML = "TEST";
 
+  function setComment(text) {
+    note = document.createElement("div")
+    note.setAttribute("class", "d-flex justify-content-center py-2")
+    noteChild = document.createElement("div")
+    noteChild.setAttribute("class", "second py-2 px-2")
+    noteText = document.createElement("span")
+    noteText.setAttribute("class", "text1")
+    noteText.innerHTML = text
+
+    noteChild.append(noteText);
+    note.append(noteChild)
+
+    return note
+  }
+
+  notesContainer.append(setComment("asdfdsaf"))
+  notesContainer.append(setComment("123ijadsi"))
+
+  // 
   
   let notesBtn = document.createElement("i");
   notesBtn.setAttribute("style", "margin-right: 1em; height: 1em; width: 1em");
   notesBtn.setAttribute("class", "far fa-comments");
   notesBtn.setAttribute("id", "notesBtn")
+
 
 
 
