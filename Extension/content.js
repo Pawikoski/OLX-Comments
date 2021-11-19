@@ -34,6 +34,7 @@ function callback() {
     console.log("click")
   }
   
+  let notesBtn = document.createElement
   notesBtn = '<i onclick="document.querySelector(\'.hover_bkgr_fricc\').classList.remove(\'hidden\');" style="margin-right: 1em; height: 1em; width: 1em" class="far fa-comments"></i>';
   $(".css-sg1fy9 div").prepend(notesBtn);
 
